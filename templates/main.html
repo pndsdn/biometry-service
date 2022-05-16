@@ -29,13 +29,13 @@
 					<section class="titles">
 						<div id="upload-title">Upload file</div>
 					</section>
-					<section class="content">
-						<input id="upload-file" type="file" value="Choose file" class="active">
+					<form method="post" action="http://localhost:8888/upload" enctype="multipart/form-data" class="content">
+						<input id="upload-file" name="file" type="file" value="Choose file" class="active">
 						<label for="upload-file" id="upload-file-button" class="unselected-file">
 							<span id="upload-file-text">Choose file</span>
 						</label>
 						<input id="submit-file" type="submit" value="Submit" class="inactive">
-					</section>
+					</form>
 				</section>
             </div>
 
