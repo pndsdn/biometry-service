@@ -29,20 +29,21 @@ function startWebCam() {
 }
 
 function stop() {
-    let stream = video.srcObject;
-    let tracks = stream.getTracks();
+    if (streamGo) {
+        let stream = video.srcObject;
+        let tracks = stream.getTracks();
 
-    for (let i = 0; i < tracks.length; i++) {
-        let track = tracks[i];
-        track.stop();
+        for (let i = 0; i < tracks.length; i++) {
+            let track = tracks[i];
+            track.stop();
+        }
+        streamGo = false;
+        video.srcObject = null;
     }
-
-    video.srcObject = null;
 }
 
 function uploadFile(e) {
-    if (streamGo)
-        stop();
+    stop();
     if (this.files && this.files.length === 1) {
         submitButton.className = 'active';
         document.querySelector('#upload-file-text').textContent = 'File selected';
