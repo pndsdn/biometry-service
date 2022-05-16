@@ -3,173 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Hello to tracking page!</title>
-		<!-- <link rel="stylesheet" type="text/css" href="IntroductionIntoIT/templates/styles/main-style.css"> -->
-		<style type="text/css">
-			*
-			{
-				margin: 0;
-				padding: 0;
-			}
-
-			body
-			{
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background-color: #191919;
-				width: 100%
-				height: 100vh;
-			}
-
-			#container
-			{
-				display: flex;
-				justify-content: center;
-				flex-direction: column;
-				align-items: center;
-				width: 900px;
-				min-width: 600px;
-			}
-
-			#videoSection
-			{
-				background-color: #191919;
-				margin: 20px;
-			}
-
-			#videoElement
-			{
-				background-color: #111;
-				border-radius: 10px;
-				height: 416px;
-				box-shadow: inset 0 0 15px 3px #090909;
-				min-width: inherit;
-			}
-
-			#controlPanel
-			{
-				width: 416px;
-				height: 50px;
-				display: flex;
-				justify-content: space-between;
-				flex-direction: row;
-				align-items: center;
-			}
-
-			input
-			{
-				width: 200px;
-				height: 50px;
-				background-color: #111;
-				transition: box-shadow 0.1s, font-size 0.1s;
-				border: 1px solid #0f0f0f;
-				border-radius: 10px;
-				color: #aaa;
-				font-family: monospace;
-				font-size: 16px;
-			}
-
-			input:active
-			{
-				width: 200px;
-				height: 50px;
-				font-size: 15px;
-				background-color: #111;
-				box-shadow: inset 0 0 10px 3px #090909;
-			}
-
-			.cssload-container{
-				position:relative;
-				top: -208px;
-				visibility: hidden;
-			}
-				
-			.cssload-whirlpool,
-			.cssload-whirlpool::before,
-			.cssload-whirlpool::after {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				border: 1px solid rgb(170,170,170);
-				border-left-color: rgb(186,89,186);
-				border-radius: 974px;
-					-o-border-radius: 974px;
-					-ms-border-radius: 974px;
-					-webkit-border-radius: 974px;
-					-moz-border-radius: 974px;
-			}
-
-			.cssload-whirlpool {
-				margin: -24px 0 0 -24px;
-				height: 49px;
-				width: 49px;
-				animation: cssload-rotate 1150ms linear infinite;
-					-o-animation: cssload-rotate 1150ms linear infinite;
-					-ms-animation: cssload-rotate 1150ms linear infinite;
-					-webkit-animation: cssload-rotate 1150ms linear infinite;
-					-moz-animation: cssload-rotate 1150ms linear infinite;
-			}
-
-			.cssload-whirlpool::before {
-				content: "";
-				margin: -22px 0 0 -22px;
-				height: 43px;
-				width: 43px;
-				animation: cssload-rotate 1150ms linear infinite;
-					-o-animation: cssload-rotate 1150ms linear infinite;
-					-ms-animation: cssload-rotate 1150ms linear infinite;
-					-webkit-animation: cssload-rotate 1150ms linear infinite;
-					-moz-animation: cssload-rotate 1150ms linear infinite;
-			}
-
-			.cssload-whirlpool::after {
-				content: "";
-				margin: -28px 0 0 -28px;
-				height: 55px;
-				width: 55px;
-				animation: cssload-rotate 2300ms linear infinite;
-					-o-animation: cssload-rotate 2300ms linear infinite;
-					-ms-animation: cssload-rotate 2300ms linear infinite;
-					-webkit-animation: cssload-rotate 2300ms linear infinite;
-					-moz-animation: cssload-rotate 2300ms linear infinite;
-			}
-
-
-
-			@keyframes cssload-rotate {
-				100% {
-					transform: rotate(360deg);
-				}
-			}
-
-			@-o-keyframes cssload-rotate {
-				100% {
-					-o-transform: rotate(360deg);
-				}
-			}
-
-			@-ms-keyframes cssload-rotate {
-				100% {
-					-ms-transform: rotate(360deg);
-				}
-			}
-
-			@-webkit-keyframes cssload-rotate {
-				100% {
-					-webkit-transform: rotate(360deg);
-				}
-			}
-
-			@-moz-keyframes cssload-rotate {
-				100% {
-					-moz-transform: rotate(360deg);
-				}
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="{{ static_url('styles/main-style.css') }}">
 	</head>
 	<body>
 
-        <section id="container">
+        <section id="webcam-container">
         	<div id="videoSection">
         		<video autoplay id="videoElement"></video>
         		<div class="cssload-container">
@@ -182,44 +20,10 @@
             </div>
         </section>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script>
- 
-            var video = document.querySelector("#videoElement");
-            var stopVideo = document.querySelector("#stop");
-            var startVideo = document.querySelector("#start");
-            var loadCircle = document.querySelector(".cssload-container");
- 
- 
-            stopVideo.addEventListener("click", stop, false);
-            startVideo.addEventListener("click", startWebCam, false);
- 
- 
-            function startWebCam() {
-            	loadCircle.style.visibility = 'visible';
-                if (navigator.mediaDevices.getUserMedia) {
-                    navigator.mediaDevices.getUserMedia({video: true})
-                            .then(function (stream) {
-                                video.srcObject = stream;
-                                loadCircle.style.visibility = 'hidden';
-                            })
-                            .catch(function (err0r) {
-                                console.log("Something went wrong!");
-                            });
-                }
-            }
- 
-            function stop(e) {
-                var stream = video.srcObject;
-                var tracks = stream.getTracks();
- 
-                for (var i = 0; i < tracks.length; i++) {
-                    var track = tracks[i];
-                    track.stop();
-                }
- 
-                video.srcObject = null;
-            }
-        </script>
+		<section id="upload-file-container">
+			<input id="upload-file" type="file">
+			<input id="submit-file" type="submit" value="Submit">
+		</section>
 	</body>
+	<script type="text/javascript" src="{{ static_url('scripts/main-app.js') }}"></script>
 </html>
