@@ -11,8 +11,10 @@ class MainHandler(tornado.web.RequestHandler):
 
 class UploadHandler(tornado.web.RequestHandler):
     def post(self):
-        file = self.request.files['file']
-        print(file[0]['filename'])
+        file = self.request.files['file'][0]
+
+        output_file = open(f'../uploads/{file["filename"]}', 'wb')
+        output_file.write(file['body'])
         self.redirect('http://localhost:8888/')
 
 
