@@ -6,12 +6,9 @@ let inputFile = document.querySelector("#upload-file");
 let submitButton = document.querySelector("#submit-file");
 let streamGo = false;
 
-
 stopVideo.addEventListener("click", stop, false);
 startVideo.addEventListener("click", startWebCam, false);
 inputFile.addEventListener("change", uploadFile, false);
-submitButton.addEventListener("click", submitFile, false);
-
 
 function startWebCam() {
 	loadCircle.style.visibility = 'visible';
@@ -46,18 +43,13 @@ function uploadFile(e) {
     stop();
     if (this.files && this.files.length === 1) {
         submitButton.className = 'active';
+        submitButton.disabled = false;
         document.querySelector('#upload-file-text').textContent = 'File selected';
         document.querySelector('#upload-file-button').className ='selected-file';
     } else {
         submitButton.className = 'inactive';
+        submitButton.disabled = true;
         document.querySelector('#upload-file-text').textContent = 'Choose file';
         document.querySelector('#upload-file-button').className ='unselected-file';
     }
-}
-
-function submitFile (e) {
-    if (this.classList.contains('active'))
-        console.log('click');
-    else if (this.classList.contains('inactive'))
-        console.log('nope! button is inactive');
 }
