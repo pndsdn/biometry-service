@@ -17,7 +17,7 @@ class UploadHandler(tornado.web.RequestHandler):
                                f'/uploads/{file["filename"]}', 'wb')
             output_file.write(file['body'])
         except Exception:
-            print('wrong POST params: file have not been attached)')
+            print('WrongPOSTParams: file have not been attached)')
 
         self.redirect('http://localhost:8888/')
 
