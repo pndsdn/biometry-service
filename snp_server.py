@@ -1,6 +1,6 @@
 import tornado.ioloop
 import tornado.web
-import os.path
+import os
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -15,6 +15,11 @@ class UploadHandler(tornado.web.RequestHandler):
             output_file = open(f'{os.path.join(os.path.dirname(__file__))}'
                                f'/uploads/{file["filename"]}', 'wb')
             output_file.write(file['body'])
+
+            # while not os.path.exists('')
+            os.system(f'bash {os.path.join(os.path.dirname(__file__))}/deepSort/'
+                      f'track.py --source uploads/{file["filename"]} '
+                      f'--yolo_model weights.pt --save-vid')
         except Exception:
             print('Error: file have not been attached')
 
