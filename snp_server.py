@@ -16,10 +16,10 @@ class UploadHandler(tornado.web.RequestHandler):
                                f'/uploads/{file["filename"]}', 'wb')
             output_file.write(file['body'])
 
-            # while not os.path.exists('')
-            os.system(f'bash {os.path.join(os.path.dirname(__file__))}/deepSort/'
-                      f'track.py --source uploads/{file["filename"]} '
+            # track.py
+            os.system(f'python3 track.py --source uploads/{file["filename"]} '
                       f'--yolo_model weights.pt --save-vid')
+
         except Exception:
             print('Error: file have not been attached')
 
@@ -43,4 +43,6 @@ if __name__ == "__main__":
     try:
         tornado.ioloop.IOLoop.current().start()
     except KeyboardInterrupt:
+        os.system('rm -rf uploads/*')
+        os.system('rm -rf runs/*')
         print('Server stopped')
