@@ -1,3 +1,4 @@
 .gitignore
+.gitmodules
 README.md
 docker-compose.yml
