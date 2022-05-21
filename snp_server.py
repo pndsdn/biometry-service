@@ -30,8 +30,7 @@ class UploadHandler(tornado.web.RequestHandler):
         except Exception:
             print('Error: file have not been attached')
 
-        self.redirect('http://localhost:8888/')
-        remove_files()
+        self.redirect('/show')
 
 
 def make_app() -> tornado.web.Application:
@@ -39,10 +38,9 @@ def make_app() -> tornado.web.Application:
     return tornado.web.Application([
         (r'/', MainHandler),
         (r'/upload', UploadHandler)],
-        static_path=os.path.join(os.path.dirname(__file__),
-                                 'static'),
-        template_path=os.path.join(os.path.dirname(__file__),
-                                   'templates'))
+        static_path=os.path.join(os.path.dirname(__file__), 'static'),
+        template_path=os.path.join(os.path.dirname(__file__), 'templates')
+    )
 
 
 if __name__ == "__main__":

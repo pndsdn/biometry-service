@@ -256,7 +256,7 @@ def detect(opt):
                 vid_writer[i].write(im0)
 
     # Write results into database
-    dbm.insert(statistics_db)
+    # dbm.insert(statistics_db)
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
