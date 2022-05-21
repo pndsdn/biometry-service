@@ -2,6 +2,13 @@ import tornado.ioloop
 import tornado.web
 import os
 
+import db_manager as dbm
+
+
+def remove_files() -> None:
+    os.system('rm -rf uploads/*')
+    os.system('rm -rf runs/*')
+
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self) -> None:
@@ -24,6 +31,7 @@ class UploadHandler(tornado.web.RequestHandler):
             print('Error: file have not been attached')
 
         self.redirect('http://localhost:8888/')
+        remove_files()
 
 
 def make_app() -> tornado.web.Application:
@@ -43,6 +51,5 @@ if __name__ == "__main__":
     try:
         tornado.ioloop.IOLoop.current().start()
     except KeyboardInterrupt:
-        os.system('rm -rf uploads/*')
-        os.system('rm -rf runs/*')
+        remove_files()
         print('Server stopped')
