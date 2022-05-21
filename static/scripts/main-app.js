@@ -46,6 +46,23 @@ function uploadFile(e) {
         submitButton.disabled = false;
         document.querySelector('#upload-file-text').textContent = 'File selected';
         document.querySelector('#upload-file-button').className ='selected-file';
+        let files = this.files;
+        let data = new FormData();
+        for(let i = 0; i < files.length; i++) {
+            data.append(i, files[i]);
+        }
+
+        $.ajax({
+            url: "/upload",
+            type: 'POST',
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log('suck')
+            }
+        });
     } else {
         submitButton.className = 'inactive';
         submitButton.disabled = true;
