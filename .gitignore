@@ -1,5 +1,6 @@
 venv
-.idea/
 runs/
+.idea/
+uploads/
 inference/
 __pycache__/
