@@ -30,6 +30,7 @@ from yolov5.utils.torch_utils import select_device, time_sync
 from yolov5.utils.plots import Annotator, colors, save_one_box
 from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
+import db_manager as dbm
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # yolov5 deepsort root directory
@@ -119,9 +120,7 @@ def detect(opt):
 
     # Create dictionary of lists for database {id:[class, frame_count]}
     statistics_db: dict = {}
-    buff_frame: dict = {} # {id:frame_count}
-
-    frame: int = 0
+    buff_frame: dict = {}  # {id:frame_count}
 
     # Run tracking
     model.warmup(imgsz=(1 if pt else nr_sources, 3, *imgsz))  # warmup
@@ -215,12 +214,12 @@ def detect(opt):
                         if save_vid or save_crop or show_vid:  # Add bbox to image
                             c = int(cls)  # integer class
 
-                            if buff_frame.get(int(id)):
-                                statistics_db[int(id)] = [names[c], buff_frame[int(id)]+1]
+                            if buff_frame.get(f'{int(id)}_{names[c]}'):
+                                statistics_db[f'{int(id)}_{names[c]}'] = [names[c], buff_frame[f'{int(id)}_{names[c]}'] + 1]
                             else:
-                                statistics_db[int(id)] = [names[c], 1]
+                                statistics_db[f'{int(id)}_{names[c]}'] = [names[c], 1]
 
-                            buff_frame[int(id)] = statistics_db[int(id)][1]
+                            buff_frame[f'{int(id)}_{names[c]}'] = statistics_db[f'{int(id)}_{names[c]}'][1]
 
                             label = f'{id:0.0f} {names[c]} {conf:.2f}'
                             annotator.box_label(bboxes, label, color=colors(c, True))
@@ -255,6 +254,9 @@ def detect(opt):
                     save_path = str(Path(save_path).with_suffix('.mp4'))  # force *.mp4 suffix on results videos
                     vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                 vid_writer[i].write(im0)
+
+    # Write results into database
+    dbm.insert(statistics_db)
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
