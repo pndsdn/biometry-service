@@ -2,3 +2,4 @@ venv
 .idea/
 runs/
 inference/
+__pycache__/
