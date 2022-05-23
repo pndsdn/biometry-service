@@ -1,17 +1,39 @@
 # Biometry tracking service
-## Table of contents
-1. [Overview](README.md:9)
-2. [Installation](README.md:11)
-3. [Documentation](README.md:13)
-## Overview
-## Installation
-Clone the repository using the following command:
+## Содержание
+1. [Обзор](README.md:6)
+2. [Установка](README.md:7)
+3. [Документация](README.md:39)
+## Обзор
+## Установка
+Склонируйте репозиторий, используя команду:
 ```bash
 git clone https://github.com/pndsdn/biometry-service.git
 ```
-In the project directory, run docker-compose.yml:
+Перейдите в директорию проекта и запустите docker-compose:
 ```bash
 cd biometry-service
 docker-compose up -d
 ```
-## Documentation
+__ПРИМЕЧАНИЯ:__ 
+
+- Перед сборкой убедитесь, что у вас есть 3,5 ГБ свободного 
+пространства в корневой папке: ```df -h```
+- Версия docker-compose должна быть 1.26 и выше.
+
+После сборки образа запустите следующую команду для создания схемы и таблицы БД:
+```bash
+docker-compose up -d init_db
+```
+__ПРИМЕЧАНИЕ:__
+Данную команду нужно выполнить один раз. После остановки и 
+повторного запуска контейнеров её выполнять __НЕНУЖНО__
+
+Остановка контейнеров:
+```bash
+docker-compose stop
+```
+Повторный запуск:
+```bash
+docker-compose start
+```
+## Документация
