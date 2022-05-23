@@ -2,19 +2,26 @@ version: "3"
 services:
   server:
     build: .
+    container_name: bt_server
     restart: always
     ports:
       - 8888:8888
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres
+    container_name: bt_postgres
     environment:
       POSTGRES_DB: "bio-tracking"
       POSTGRES_USER: "dbadmin"
       POSTGRES_PASSWORD: "pass"
     ports:
       - 5432:5432
+
   adminer:
     image: adminer
+    container_name: bt_adminer
     restart: always
     ports:
       - 8080:8080
