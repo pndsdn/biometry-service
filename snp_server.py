@@ -1,8 +1,7 @@
 import tornado.ioloop
 import tornado.web
-import os
 
-import db_manager as dbm
+import os
 
 
 def remove_files() -> None:
@@ -30,7 +29,7 @@ class UploadHandler(tornado.web.RequestHandler):
         except Exception:
             print('Error: file have not been attached')
 
-        self.redirect('/show')
+        self.redirect('/')
 
 
 def make_app() -> tornado.web.Application:

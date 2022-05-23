@@ -118,7 +118,7 @@ def detect(opt):
     # Get names and colors
     names = model.module.names if hasattr(model, 'module') else model.names
 
-    # Create dictionary of lists for database {id:[class, frame_count]}
+    # Create dictionary of lists for database {id_cl:[id, class, frame_count]}
     statistics_db: dict = {}
     buff_frame: dict = {}  # {id:frame_count}
 
@@ -215,11 +215,11 @@ def detect(opt):
                             c = int(cls)  # integer class
 
                             if buff_frame.get(f'{int(id)}_{names[c]}'):
-                                statistics_db[f'{int(id)}_{names[c]}'] = [names[c], buff_frame[f'{int(id)}_{names[c]}'] + 1]
+                                statistics_db[f'{int(id)}_{names[c]}'] = [int(id), names[c], buff_frame[f'{int(id)}_{names[c]}'] + 1]
                             else:
-                                statistics_db[f'{int(id)}_{names[c]}'] = [names[c], 1]
+                                statistics_db[f'{int(id)}_{names[c]}'] = [int(id), names[c], 1]
 
-                            buff_frame[f'{int(id)}_{names[c]}'] = statistics_db[f'{int(id)}_{names[c]}'][1]
+                            buff_frame[f'{int(id)}_{names[c]}'] = statistics_db[f'{int(id)}_{names[c]}'][2]
 
                             label = f'{id:0.0f} {names[c]} {conf:.2f}'
                             annotator.box_label(bboxes, label, color=colors(c, True))
@@ -255,8 +255,8 @@ def detect(opt):
                     vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                 vid_writer[i].write(im0)
 
-    # Write results into database
-    # dbm.insert(statistics_db)
+    # Insert results into database
+    dbm.insert(statistics_db)
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
