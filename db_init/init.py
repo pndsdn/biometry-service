@@ -8,7 +8,6 @@ if __name__ == "__main__":
                             port="5432")
 
     cursor = conn.cursor()
-
     query = """CREATE SCHEMA IF NOT EXISTS service AUTHORIZATION dbadmin;"""
     cursor.execute(query)
     conn.commit()
