@@ -121,6 +121,7 @@ def detect(opt):
     # Create dictionary of lists for database {id_cl:[id, class, frame_count]}
     statistics_db: dict = {}
     buff_frame: dict = {}  # {id:frame_count}
+    file_name = ''
 
     # Run tracking
     model.warmup(imgsz=(1 if pt else nr_sources, 3, *imgsz))  # warmup
@@ -161,6 +162,7 @@ def detect(opt):
                 if source.endswith(VID_FORMATS):
                     txt_file_name = p.stem
                     save_path = str(save_dir / p.name)  # im.jpg, vid.mp4, ...
+                    file_name = p.name
                 # folder with imgs
                 else:
                     txt_file_name = p.parent.name  # get folder name containing current img
@@ -256,7 +258,7 @@ def detect(opt):
                 vid_writer[i].write(im0)
 
     # Insert results into database
-    dbm.insert(statistics_db)
+    dbm.insert(statistics_db, file_name)
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image

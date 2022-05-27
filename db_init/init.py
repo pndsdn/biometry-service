@@ -9,9 +9,6 @@ if __name__ == "__main__":
 
     cursor = conn.cursor()
 
-    query = """
-CREATE SCHEMA IF NOT EXISTS service AUTHORIZATION dbadmin;
-CREATE TABLE IF NOT EXISTS service.objects (id SERIAL NOT NULL, frame_id VARCHAR NOT NULL, obj_class VARCHAR NOT NULL, time VARCHAR NOT NULL);
-"""
+    query = """CREATE SCHEMA IF NOT EXISTS service AUTHORIZATION dbadmin;"""
     cursor.execute(query)
     conn.commit()
