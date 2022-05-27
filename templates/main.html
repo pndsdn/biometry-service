@@ -8,26 +8,18 @@
 	<body>
         <section id="container">
         	<div id="videoSection">
-        		<video autoplay id="videoElement"></video>
+        		<video src="" autoplay id="videoElement"></video>
         		<div class="cssload-container">
 					<div class="cssload-whirlpool"></div>
 				</div>
         	</div>
             <div id="controlPanel">
-				<section id="web-controlPanel">
-					<section class="titles">
-						<div id="web-title">Use Webcam</div>
-					</section>
-					<section class="content">
-						<input value="Start Video" type="submit" id="start" class="active">
-            			<input value="Stop Video" type="submit" id="stop" class="active">
-					</section>
-				</section>
+
 				<section id="upload-file-controlPanel">
 					<section class="titles">
 						<div id="upload-title">Upload file</div>
 					</section>
-					<form method="post" action="http://localhost:8888/upload" enctype="multipart/form-data" class="content" id="upload-form">
+					<form method="post" action="/upload" enctype="multipart/form-data" class="content" id="upload-form">
 						<input id="upload-file" name="file" type="file" value="Choose file" class="active">
 						<label for="upload-file" id="upload-file-button" class="unselected-file">
 							<span id="upload-file-text">Choose file</span>
