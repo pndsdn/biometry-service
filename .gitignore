@@ -4,3 +4,4 @@ runs/
 uploads/
 inference/
 __pycache__/
+static/media/
