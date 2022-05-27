@@ -30,21 +30,31 @@ class UploadHandler(tornado.web.RequestHandler):
                        f'/runs/track/weights_osnet_x0_25/'
             path_in = f'{os.path.join(os.path.dirname(__file__))}' \
                       f'/static/media/'
-            print(f'cp {path_out}{file["filename"]} {path_in}')
+
             os.system(f'cp {path_out}{file["filename"]} {path_in}')
             os.system(f'rm -rf {path_out}{file["filename"]}')
 
-            self.redirect("/")
+            self.redirect(f"/show?v={file['filename']}")
 
         except Exception:
             print('Error: file have not been attached')
+
+
+class ShowMediaHandler(tornado.web.RequestHandler):
+    def get(self):
+        file_name = self.get_argument('v')
+        file = open(f'{os.path.join(os.path.dirname(__file__))}'
+                    f'/static/media/{file_name}')
+        data = {'video': file}
+        self.write(data)
 
 
 def make_app() -> tornado.web.Application:
     print('Server started')
     return tornado.web.Application([
         (r'/', MainHandler),
-        (r'/upload', UploadHandler)],
+        (r'/upload', UploadHandler),
+        (r'/show', ShowMediaHandler)],
         static_path=os.path.join(os.path.dirname(__file__), 'static'),
         template_path=os.path.join(os.path.dirname(__file__), 'templates')
     )
