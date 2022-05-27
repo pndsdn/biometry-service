@@ -4,11 +4,12 @@
 		<meta charset="utf-8">
 		<title>Welcome to tracking page!</title>
 		<link rel="stylesheet" type="text/css" href="{{ static_url('styles/main-style.css') }}">
+		<link rel="alternate" href="{{ static_url('media') }}">
 	</head>
 	<body>
         <section id="container">
         	<div id="videoSection">
-        		<video src="" autoplay id="videoElement"></video>
+        		<video src="{{ static_url('media/out.mp4') }}" id="videoElement"></video>
         		<div class="cssload-container">
 					<div class="cssload-whirlpool"></div>
 				</div>

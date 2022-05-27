@@ -26,6 +26,14 @@ class UploadHandler(tornado.web.RequestHandler):
             os.system(f'python3 track.py --source uploads/{file["filename"]} '
                       f'--yolo_model weights.pt --save-vid')
 
+            path_out = f'{os.path.join(os.path.dirname(__file__))}' \
+                       f'/runs/track/weights_osnet_x0_25/'
+            path_in = f'{os.path.join(os.path.dirname(__file__))}' \
+                      f'/static/media/'
+            print(f'cp {path_out}{file["filename"]} {path_in}')
+            os.system(f'cp {path_out}{file["filename"]} {path_in}')
+            os.system(f'rm -rf {path_out}{file["filename"]}')
+
             self.redirect("/")
 
         except Exception:
