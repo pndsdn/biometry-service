@@ -12,7 +12,7 @@
 	user-select: none;
 }
 
-body, #container, #controlPanel, #web-controlPanel, #upload-file-controlPanel {
+body, #container, #controlPanel, #upload-file-controlPanel {
 	display: flex;
 	align-items: center;
 }
@@ -44,7 +44,7 @@ body {
 #controlPanel {
 	width: 832px;
 	height: 100px;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
 }
 
