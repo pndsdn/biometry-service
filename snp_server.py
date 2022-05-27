@@ -26,10 +26,10 @@ class UploadHandler(tornado.web.RequestHandler):
             os.system(f'python3 track.py --source uploads/{file["filename"]} '
                       f'--yolo_model weights.pt --save-vid')
 
+            self.redirect("/")
+
         except Exception:
             print('Error: file have not been attached')
-
-        self.redirect('/')
 
 
 def make_app() -> tornado.web.Application:
