@@ -1,9 +1,4 @@
 # Biometry tracking service
-## Содержание
-1. [Обзор](README.md:6)
-2. [Установка](README.md:7)
-3. [Документация](README.md:36)
-## Обзор
 ## Установка
 Склонируйте репозиторий, используя команду:
 ```bash
@@ -33,4 +28,3 @@ docker-compose stop
 ```bash
 docker-compose start
 ```
-## Документация
