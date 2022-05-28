@@ -1,7 +1,4 @@
 venv
-runs/
 .idea/
-uploads/
 inference/
 __pycache__/
-static/media/
