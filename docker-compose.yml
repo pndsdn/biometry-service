@@ -5,7 +5,7 @@ services:
     container_name: bt_server
     restart: always
     ports:
-      - 8888:8888
+      - "8888:8888"
     depends_on:
       - postgres
 
@@ -22,7 +22,7 @@ services:
     container_name: bt_adminer
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
 
   init_db:
     build: db_init/
