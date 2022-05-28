@@ -8,7 +8,6 @@ submitButton.addEventListener("click", processingFile, false)
 
 function uploadFile(e) {
     if (this.files && this.files.length === 1) {
-        file = this.files;
         submitButton.className = 'active';
         submitButton.disabled = false;
         document.querySelector('#upload-file-text').textContent = 'File selected';
