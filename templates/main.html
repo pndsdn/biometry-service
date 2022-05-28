@@ -3,13 +3,13 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Welcome to tracking page!</title>
-		<link rel="stylesheet" type="text/css" href="{{ static_url('styles/main-style.css') }}">
+		<link rel="stylesheet" type="text/css" href="static/styles/main-style.css">
 	</head>
 	<body>
         <section id="container">
         	<div id="videoSection">
         		<video id="videoElement">
-					<source src="" type="video/webm">
+					<source src="" type="video/mp4">
 				</video>
         		<div class="cssload-container">
 					<div class="cssload-whirlpool"></div>
@@ -32,4 +32,5 @@
             </div>
         </section>
 	</body>
-	<script type="text/javascript" src="{{ static_url('scripts/main-app.js') }}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="static/scripts/main-app.js"></script>

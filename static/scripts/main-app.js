@@ -8,6 +8,7 @@ submitButton.addEventListener("click", processingFile, false)
 
 function uploadFile(e) {
     if (this.files && this.files.length === 1) {
+        file = this.files;
         submitButton.className = 'active';
         submitButton.disabled = false;
         document.querySelector('#upload-file-text').textContent = 'File selected';
@@ -22,9 +23,9 @@ function uploadFile(e) {
 }
 
 function processingFile(e) {
-    loadCircle.style.visibility = 'visible';
-    submitButton.value = 'Processing';
     submitButton.className = 'inactive';
+    submitButton.value = 'Processing';
+    loadCircle.style.visibility = 'visible';
     document.querySelector('#upload-file-text').textContent = 'Choose file';
     document.querySelector('#upload-file-button').className = 'unselected-file';
 }
