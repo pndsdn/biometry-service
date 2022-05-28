@@ -6,4 +6,4 @@ RUN apt-get update && apt-get install -y python3-opencv
 RUN pip install opencv-python
 COPY . .
 EXPOSE 8888
-CMD ["python", "snp_server.py"]
+CMD ["python", "flsk_server.py"]
