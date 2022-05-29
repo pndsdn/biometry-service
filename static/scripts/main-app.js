@@ -4,7 +4,7 @@ let inputFile = document.querySelector("#upload-file");
 let submitButton = document.querySelector("#submit-file");
 
 inputFile.addEventListener("change", uploadFile, false);
-submitButton.addEventListener("click", processingFile, false)
+submitButton.addEventListener("click", processingFile, false);
 
 function uploadFile(e) {
     if (this.files && this.files.length === 1) {

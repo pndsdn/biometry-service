@@ -33,8 +33,7 @@ def upload():
                   f'--yolo_model weights.pt --save-vid')
         os.system(f'rm -rf uploads/{filename}')
 
-        track_file = f'{os.path.join(os.path.dirname(__file__))}' \
-                     f'/runs/track/weights_osnet_x0_25/{filename}'
+        track_file = f'{TRACK_FOLDER}{filename}'
 
         os.system(f'cp {track_file} {MEDIA_FOLDER}')
         os.system('rm -rf runs/*')
@@ -45,4 +44,3 @@ def upload():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888)
-
