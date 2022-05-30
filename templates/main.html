@@ -8,27 +8,30 @@
 	<body>
         <section id="container">
         	<div id="videoSection">
-        		<video id="videoElement">
-					<source src="" type="video/mp4">
+        		<video id="videoElement" autoplay="autoplay" loop="loop" muted>
+					<source src="static/bt_video.mp4" type="video/mp4">
 				</video>
-        		<div class="cssload-container">
-					<div class="cssload-whirlpool"></div>
-				</div>
         	</div>
             <div id="controlPanel">
 				<section id="upload-file-controlPanel">
 					<section class="titles">
-						<div id="upload-title">Upload file</div>
+						<div id="upload-title">Загрузка файлов</div>
 					</section>
 					<form method="post" action="/upload" enctype="multipart/form-data" class="content" id="upload-form">
 						<input id="upload-file" name="file" type="file" value="Choose file" class="active">
 						<label for="upload-file" id="upload-file-button" class="unselected-file">
-							<span id="upload-file-text">Choose file</span>
+							<span id="upload-file-text">Выбрать файл</span>
 						</label>
-						<input id="submit-file" type="submit" value="Submit" class="inactive" disabled>
+						<input id="submit-file" type="submit" value="Отправить" class="inactive" disabled>
 					</form>
 				</section>
             </div>
         </section>
+		<section id="links">
+			<a href="https://github.com/pndsdn/biometry-service">
+				<img src="static/github-icon.png" style="width: 25px;">
+				<p id="github">Наш проект</p>
+			</a>
+		</section>
 	</body>
 	<script type="text/javascript" src="static/scripts/main-app.js"></script>
