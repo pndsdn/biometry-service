@@ -33,6 +33,7 @@ def upload():
         file.save(os.path.join(UPLOAD_FOLDER, filename))
 
         if filename.split('.')[1] not in VIDEO_FORMATS:
+            print('wrong format')
             os.system(f'rm -rf uploads/{filename}')
             return redirect('/')
 

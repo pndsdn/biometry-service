@@ -30,7 +30,6 @@ from yolov5.utils.torch_utils import select_device, time_sync
 from yolov5.utils.plots import Annotator, colors, save_one_box
 from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
-from flsk_server import UPLOAD_FOLDER
 import db_manager as dbm
 
 FILE = Path(__file__).resolve()
@@ -123,12 +122,12 @@ def detect(opt):
     statistics_db: dict = {}
     buff_frame: dict = {}  # {id:frame_count}
     file_name = ''
+    vfps: int = 0
 
     # Run tracking
     model.warmup(imgsz=(1 if pt else nr_sources, 3, *imgsz))  # warmup
     dt, seen = [0.0, 0.0, 0.0, 0.0], 0
     for frame_idx, (path, im, im0s, vid_cap, s) in enumerate(dataset):
-        print(s)
         t1 = time_sync()
         im = torch.from_numpy(im).to(device)
         im = im.half() if half else im.float()  # uint8 to fp16/32
@@ -251,6 +250,7 @@ def detect(opt):
                         vid_writer[i].release()  # release previous video writer
                     if vid_cap:  # video
                         fps = vid_cap.get(cv2.CAP_PROP_FPS)
+                        vfps = fps
                         w = int(vid_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
                         h = int(vid_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
                     else:  # streams
@@ -259,11 +259,8 @@ def detect(opt):
                     vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                 vid_writer[i].write(im0)
 
-    cap = cv2.VideoCapture(f'{UPLOAD_FOLDER}{file_name}')
-    if cap.isOpened():
-        fps = cap.get(5)
     # Insert results into database
-    dbm.insert(statistics_db, file_name, fps)
+    dbm.insert(statistics_db, file_name, vfps)
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
