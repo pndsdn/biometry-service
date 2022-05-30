@@ -3,8 +3,7 @@ from flask import Flask, \
     render_template, \
     redirect, \
     request, \
-    send_from_directory, \
-    flash
+    send_from_directory
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = f'{os.path.join(os.path.dirname(__file__))}/uploads/'
@@ -16,7 +15,6 @@ VIDEO_FORMATS = ['asf', 'avi', 'gif', 'm4v', 'mkv', 'mov',
                  'mp4', 'mpeg', 'mpg', 'ts', 'wmv']
 
 app = Flask(__name__)
-app.secret_key = 'some_secret'
 
 
 @app.route('/', methods=['GET'])

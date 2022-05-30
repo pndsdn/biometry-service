@@ -6,8 +6,10 @@ let inputFileButton = document.querySelector('#upload-file-button');
 
 inputFile.addEventListener("change", uploadFile, false);
 submitButton.addEventListener("click", processingFile, false);
-inputFileButton.addEventListener("mouseover", function() {if (inputFileButton.className === 'selected-file') inputFileText.textContent = 'Изменить файл'}, false);
-inputFileButton.addEventListener("mouseout", function() {if (inputFileButton.className === 'selected-file') inputFileText.textContent = 'Файл выбран'}, false);
+inputFileButton.addEventListener("mouseover", function() {
+    if (inputFileButton.className === 'selected-file') inputFileText.textContent = 'Изменить файл'}, false);
+inputFileButton.addEventListener("mouseout", function() {
+    if (inputFileButton.className === 'selected-file') inputFileText.textContent = 'Файл выбран'}, false);
 
 function uploadFile(e) {
     if (this.files && this.files.length === 1) {
